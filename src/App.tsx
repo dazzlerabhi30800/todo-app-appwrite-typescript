@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { databases, Collection_id, Database_id } from "./appWrite";
+import InputForm from "./Components/InputForm";
+import Spinner from "./Components/Spinner";
 
 function App() {
   const [todos, setTodos] = useState<Todo[] | null>(null);
@@ -21,15 +23,17 @@ function App() {
       setTodos(documents);
     }, 1200);
   }
-  if (!todos) return <div style={{fontSize: "1.3rem"}}>Loading Todos ....</div>;
+  if (!todos)
+    return <Spinner />;
   return (
     <>
       <h1>Todo App using Appwrite.</h1>
-      <ul>
+      <InputForm setTodos={setTodos} todos={todos} />
+      <div className="todo--wrapper">
         {todos.map((todo: any) => (
-          <li key={todo.$id}>{todo.todo}</li>
+          <p className="todo" key={todo.$id}>{todo.todo}</p>
         ))}
-      </ul>
+      </div>
     </>
   );
 }

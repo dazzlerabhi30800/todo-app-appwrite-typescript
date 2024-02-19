@@ -3,6 +3,14 @@ body {
   color: #fff;
 }
 
+:root {
+  --form-border-radius: 5px;
+}
+
+
+body {
+  min-height: 100vh;
+}
 #root {
   min-height: 100vh;
   display: flex;
@@ -10,22 +18,82 @@ body {
   gap: 1rem;
   justify-content: center;
   align-items: center;
-  text-align: center;
 }
 
-ul {
-  list-style: none;
+.todo--wrapper {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  align-items: center;
+  gap: 3px;
+  margin: 20px 0;
 }
 
-li {
+.todo {
   padding: 1rem;
   border-radius: 5px;
   background: #252935;
   font-size: clamp(1.1rem, 1.2vw, 1.3rem);
   font-weight: bolder;
   border: 1px solid #07b5cc;
+}
+
+form {
+  display: flex;
+  align-items: center;
+}
+
+
+#todo--input,
+.submit--btn {
+  padding: 12px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+
+
+#todo--input {
+  border-radius: var(--form-border-radius) 0 0 var(--form-border-radius);
+  background: rgb(33, 47, 62);
+  color: #fff;
+}
+
+#todo--input::placeholder {
+  color: #cecdcd;
+}
+
+
+
+.submit--btn {
+  border-radius: 0 var(--form-border-radius) var(--form-border-radius) 0;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.3s linear;
+}
+
+.submit--btn:hover {
+  background: #181831;
+  color: rgb(246, 246, 246);
+}
+
+
+/* Spinner CSS */
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #FFF;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
