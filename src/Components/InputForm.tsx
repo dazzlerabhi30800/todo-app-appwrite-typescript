@@ -1,46 +1,11 @@
 import { useState } from "react";
-import { Collection_id, Database_id, databases } from "../appWrite";
-import { nanoid } from "nanoid";
-import { ID } from "appwrite";
+import { useTodoContext } from "../Store/Store";
 
-interface props {
-  setTodos: React.Dispatch<React.SetStateAction<Todo[] | null>>;
-  todos: Todo[];
-}
-
-export default function InputForm({ setTodos, todos }: props) {
+export default function InputForm() {
   const [todoInput, setTodoInput] = useState<string>("");
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (todoInput.length < 5) {
-      alert("todo length is short");
-      return;
-    }
-    let payload = {
-      todo: todoInput,
-      todo_id: nanoid(),
-      completed: false,
-      edit: false,
-    };
-    // console.log(payload);
-    const promise = await databases.createDocument(
-      Database_id,
-      Collection_id,
-      ID.unique(),
-      payload
-    );
-    if (!promise) return;
-    const newTodo: Todo = {
-      $id: promise.$id,
-      todo: promise.todo,
-      todo_id: promise.todo_id,
-      completed: promise.completed,
-      edit: promise.edit,
-    };
-    setTodos((prev) => [...todos, newTodo]);
-  };
+  const { handleSubmit } = useTodoContext();
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={(e) => handleSubmit(e, todoInput)}>
       <input
         onChange={(e) => setTodoInput(e.target.value)}
         type="text"

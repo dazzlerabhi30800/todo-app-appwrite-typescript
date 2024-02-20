@@ -1,48 +1,42 @@
-import { FaEdit } from "react-icons/fa";
+import { FaEdit, FaTrash } from "react-icons/fa";
 import EditTodo from "./EditTodo";
-import { Collection_id, Database_id, databases } from "../appWrite";
+import { useTodoContext } from "../Store/Store";
 
-const Todo = ({
-  todo,
-  setTodos,
-  todos,
-}: {
-  todo: Todo;
-  setTodos: React.Dispatch<React.SetStateAction<Todo[] | null>>;
-  todos: Todo[];
-}) => {
-  const handleEdit = async (id: string | undefined) => {
-    if (!id) return;
-    let payload = {
-      $id: id,
-      edit: true,
-    };
-    let response = await databases.updateDocument(
-      Database_id,
-      Collection_id,
-      id,
-      payload
-    );
-    setTodos(
-      todos.map((note) => {
-        if (note.$id === id) {
-          return { ...note, edit: response.edit };
-        }
-        return note;
-      })
-    );
-  };
+const Todo = ({ todo }: { todo: Todo }) => {
+  const { handleEdit, deleteTodo, completeTodo } = useTodoContext();
+  // const handleComplete = (value: boolean) => {
+  //   console.log(value);
+  // };
 
   return (
-    <div className="todo">
-      {!todo.edit ? (
-        <p>{todo.todo}</p>
-      ) : (
-        <EditTodo note={todo} todos={todos} setTodos={setTodos} />
-      )}
-      <button className="edit--btn" onClick={() => handleEdit(todo?.$id)}>
-        <FaEdit />
-      </button>
+    <div className={`todo ${todo.completed && "completed"}`}>
+      <div className="complete--container">
+        <input
+          type="checkbox"
+          checked={todo.completed}
+          onChange={() => completeTodo(todo.$id, todo.completed)}
+          id={`todo--${todo.$id}`}
+          className="todo--check"
+        />
+        <label htmlFor={`todo--${todo.$id}`}></label>
+      </div>
+      {!todo.edit ? <p>{todo.todo}</p> : <EditTodo note={todo} />}
+      <div className="button--container">
+        <button
+          disabled={todo.completed}
+          className="edit--btn"
+          onClick={() => handleEdit(todo?.$id)}
+        >
+          <FaEdit />
+        </button>
+        <button
+          disabled={todo.completed}
+          className="remove--btn"
+          onClick={() => deleteTodo(todo?.$id)}
+        >
+          <FaTrash />
+        </button>
+      </div>
     </div>
   );
 };
