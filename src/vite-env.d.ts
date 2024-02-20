@@ -6,6 +6,7 @@ type Todo = {
   $permissions?: any;
   $updatedAt?: string;
   completed: boolean;
+  edit: boolean;
   todo: string;
   todo_id: string;
 };

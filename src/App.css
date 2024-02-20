@@ -1,3 +1,5 @@
+@import "./Components/Style.css";
+
 body {
   background-color: #121212;
   color: #fff;
@@ -6,7 +8,6 @@ body {
 :root {
   --form-border-radius: 5px;
 }
-
 
 body {
   min-height: 100vh;
@@ -20,27 +21,10 @@ body {
   align-items: center;
 }
 
-.todo--wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  margin: 20px 0;
-}
-
-.todo {
-  padding: 1rem;
-  border-radius: 5px;
-  background: #252935;
-  font-size: clamp(1.1rem, 1.2vw, 1.3rem);
-  font-weight: bolder;
-  border: 1px solid #07b5cc;
-}
-
 form {
   display: flex;
   align-items: center;
 }
-
 
 #todo--input,
 .submit--btn {
@@ -49,7 +33,6 @@ form {
   outline: none;
   font-size: 1rem;
 }
-
 
 #todo--input {
   border-radius: var(--form-border-radius) 0 0 var(--form-border-radius);
@@ -60,8 +43,6 @@ form {
 #todo--input::placeholder {
   color: #cecdcd;
 }
-
-
 
 .submit--btn {
   border-radius: 0 var(--form-border-radius) var(--form-border-radius) 0;
@@ -75,12 +56,11 @@ form {
   color: rgb(246, 246, 246);
 }
 
-
 /* Spinner CSS */
 .loader {
   width: 48px;
   height: 48px;
-  border: 5px solid #FFF;
+  border: 5px solid #fff;
   border-bottom-color: transparent;
   border-radius: 50%;
   display: inline-block;

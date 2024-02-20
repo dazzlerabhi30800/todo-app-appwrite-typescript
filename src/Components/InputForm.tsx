@@ -20,6 +20,7 @@ export default function InputForm({ setTodos, todos }: props) {
       todo: todoInput,
       todo_id: nanoid(),
       completed: false,
+      edit: false,
     };
     // console.log(payload);
     const promise = await databases.createDocument(
@@ -34,6 +35,7 @@ export default function InputForm({ setTodos, todos }: props) {
       todo: promise.todo,
       todo_id: promise.todo_id,
       completed: promise.completed,
+      edit: promise.edit,
     };
     setTodos((prev) => [...todos, newTodo]);
   };

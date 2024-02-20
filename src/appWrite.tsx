@@ -1,6 +1,4 @@
-import { Client, Databases} from "appwrite";
-
-
+import { Client, Databases } from "appwrite";
 
 export const Database_id = "65d2e1ba98dc506d4c9e";
 export const Collection_id = "65d2e1c1ceefca180096";
