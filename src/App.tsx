@@ -4,6 +4,7 @@ import InputForm from "./Components/InputForm";
 import Spinner from "./Components/Spinner";
 import Todo from "./Components/Todo";
 import { useTodoContext } from "./Store/Store";
+import { ModeToggle } from "./Store/ModeToggler";
 
 function App() {
   // Context Import
@@ -18,6 +19,7 @@ function App() {
   return (
     <>
       <h1>Todo App using Appwrite.</h1>
+      <ModeToggle />
       <InputForm />
       {loading && <Spinner />}
       {!loading && (

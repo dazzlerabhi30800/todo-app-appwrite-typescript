@@ -2,6 +2,7 @@
   --orange: #d5ef6b;
   --red: rgb(243, 26, 88);
   --button-font-size: clamp(0.8rem, 1.2vw + 2px, 1.4rem);
+  --check-label-padding: 0px 10px;
 }
 
 button,
@@ -12,6 +13,15 @@ input {
 }
 button {
   cursor: pointer;
+}
+
+.mode--btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  color: #fff;
+  font-size: clamp(1.5rem, 1.8vw + 5px, 2.2rem);
 }
 
 button:disabled {
@@ -85,7 +95,7 @@ button:disabled {
 .complete--container label {
   border: 1px solid #fff;
   border-radius: 50%;
-  padding: 0px 10px;
+  padding: var(--check-label-padding);
   width: 15px;
   height: 15px;
   background: transparent;
@@ -149,5 +159,11 @@ button:disabled {
   }
   .edit--form button:hover {
     background: #2df0bf;
+  }
+}
+
+@media Screen and (width >= 750px) {
+  :root {
+    --check-label-padding: 0 12px;
   }
 }
