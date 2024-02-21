@@ -82,14 +82,7 @@ export default function TodoContextProvider({
       payload
     );
     if (!promise) return;
-    const newTodo: Todo = {
-      $id: promise.$id,
-      todo: promise.todo,
-      todo_id: promise.todo_id,
-      completed: promise.completed,
-      edit: promise.edit,
-    };
-    setTodos((prev) => [...(todos as Todo[]), newTodo]);
+    getDocuments();
   };
 
   // function to edit Todo
@@ -99,20 +92,8 @@ export default function TodoContextProvider({
       $id: id,
       edit: true,
     };
-    let response = await databases.updateDocument(
-      Database_id,
-      Collection_id,
-      id,
-      payload
-    );
-    setTodos(
-      todos.map((note) => {
-        if (note.$id === id) {
-          return { ...note, edit: response.edit };
-        }
-        return note;
-      })
-    );
+    await databases.updateDocument(Database_id, Collection_id, id, payload);
+    getDocuments();
   };
 
   // function to confirm edit
@@ -128,20 +109,8 @@ export default function TodoContextProvider({
       edit: false,
       todo: editInput,
     };
-    let response = await databases.updateDocument(
-      Database_id,
-      Collection_id,
-      id,
-      payload
-    );
-    setTodos(
-      todos.map((note) => {
-        if (note.$id === response.$id) {
-          return { ...note, edit: response.edit, todo: response.todo };
-        }
-        return note;
-      })
-    );
+    await databases.updateDocument(Database_id, Collection_id, id, payload);
+    getDocuments();
   };
 
   // Delete Todo
@@ -158,20 +127,8 @@ export default function TodoContextProvider({
       $id: id,
       completed: !checked,
     };
-    let response = await databases.updateDocument(
-      Database_id,
-      Collection_id,
-      id,
-      payload
-    );
-    setTodos(
-      todos.map((note) => {
-        if (note.$id === response.$id) {
-          return { ...note, completed: response.completed };
-        }
-        return note;
-      })
-    );
+    await databases.updateDocument(Database_id, Collection_id, id, payload);
+    getDocuments();
   };
 
   // Return component

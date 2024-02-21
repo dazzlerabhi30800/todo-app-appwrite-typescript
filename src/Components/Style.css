@@ -1,6 +1,7 @@
 :root {
-  --orange: #efa26b;
+  --orange: #d5ef6b;
   --red: rgb(243, 26, 88);
+  --button-font-size: clamp(0.8rem, 1.2vw + 2px, 1.4rem);
 }
 
 button,
@@ -23,15 +24,18 @@ button:disabled {
   flex-direction: column;
   gap: 1rem;
   margin: 3rem 0;
-  width: clamp(300px, 100%, 500px);
+  width: clamp(270px, 95%, 560px);
+  align-items: center;
 }
 
 .todo {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   position: relative;
+  gap: 10px;
   justify-content: space-between;
-  width: 100%;
+  width: 95%;
   padding: 1rem;
   border-radius: 5px;
   background: #252935;
@@ -69,13 +73,20 @@ button:disabled {
 .complete--container label {
   border: 1px solid #fff;
   border-radius: 50%;
-  padding: 1px 11px;
+  padding: 0px 10px;
+  width: 15px;
+  height: 15px;
   background: transparent;
   cursor: pointer;
   transition: 0.3s linear;
 }
 .todo--check:checked + label {
   background: linear-gradient(to top, rgb(0, 255, 157), #204ef4);
+}
+
+.todo p {
+  font-size: clamp(0.9rem, 1vw + 4px, 1rem);
+  font-weight: 500;
 }
 
 .button--container {
@@ -91,7 +102,8 @@ button:disabled {
   border: 1px solid var(--orange);
   border-radius: 2px;
   color: var(--orange);
-  font-size: clamp(1.1rem, 1vw, 1.4rem);
+  /* font-size: clamp(1.1rem, 1vw, 1.4rem); */
+  font-size: var(--button-font-size);
   cursor: pointer;
 }
 .remove--btn {
