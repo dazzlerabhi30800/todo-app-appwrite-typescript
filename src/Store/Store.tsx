@@ -13,6 +13,7 @@ import { nanoid } from "nanoid";
 
 interface todoContext {
   todos: Todo[] | null;
+  loading: boolean;
   setTodos: Dispatch<SetStateAction<Todo[] | null>>;
   getDocuments: () => Promise<void>;
   handleSubmit: (
@@ -38,6 +39,7 @@ export default function TodoContextProvider({
 }) {
   // States
   const [todos, setTodos] = useState<Todo[] | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   // functions
 
@@ -46,6 +48,7 @@ export default function TodoContextProvider({
     const response = await databases.listDocuments(Database_id, Collection_id);
     if (!response) return;
     // console.log(response.documents);
+    setLoading(true);
     const documents: Todo[] = response.documents.map((doc: any) => ({
       $id: doc.$id,
       todo: doc.todo,
@@ -55,7 +58,8 @@ export default function TodoContextProvider({
     }));
     setTimeout(() => {
       setTodos(documents);
-    }, 1200);
+      setLoading(false);
+    }, 500);
   };
 
   // to add todo
@@ -136,6 +140,7 @@ export default function TodoContextProvider({
     <TodoContext.Provider
       value={{
         todos,
+        loading,
         setTodos,
         getDocuments,
         handleSubmit,

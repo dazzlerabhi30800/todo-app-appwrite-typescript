@@ -7,7 +7,7 @@ import { useTodoContext } from "./Store/Store";
 
 function App() {
   // Context Import
-  const { todos, getDocuments } = useTodoContext();
+  const { todos, getDocuments, loading } = useTodoContext();
 
   // function to run on start
   useEffect(() => {
@@ -19,11 +19,14 @@ function App() {
     <>
       <h1>Todo App using Appwrite.</h1>
       <InputForm />
-      <div className="todo--wrapper">
-        {todos.map((todo: any) => (
-          <Todo todo={todo} key={todo.$id} />
-        ))}
-      </div>
+      {loading && <Spinner />}
+      {!loading && (
+        <div className="todo--wrapper">
+          {todos.map((todo: any) => (
+            <Todo todo={todo} key={todo.$id} />
+          ))}
+        </div>
+      )}
     </>
   );
 }
