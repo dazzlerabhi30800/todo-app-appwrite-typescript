@@ -2,7 +2,7 @@ type Todo = {
   $collectionId?: string;
   $createdAt?: string;
   $databaseId?: string;
-  $id?: string;
+  $id: string;
   $permissions?: any;
   $updatedAt?: string;
   completed: boolean;

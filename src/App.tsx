@@ -22,8 +22,8 @@ function App() {
       {loading && <Spinner />}
       {!loading && (
         <div className="todo--wrapper">
-          {todos.map((todo: any) => (
-            <Todo todo={todo} key={todo.$id} />
+          {todos.map((todo) => (
+            <Todo key={todo.$id} todo={todo} />
           ))}
         </div>
       )}

@@ -5,8 +5,14 @@ export default function InputForm() {
   const [todoInput, setTodoInput] = useState<string>("");
   const { handleSubmit } = useTodoContext();
   return (
-    <form onSubmit={(e) => handleSubmit(e, todoInput)}>
+    <form
+      onSubmit={(e) => {
+        handleSubmit(e, todoInput);
+        setTodoInput("");
+      }}
+    >
       <input
+        value={todoInput}
         onChange={(e) => setTodoInput(e.target.value)}
         type="text"
         placeholder="Enter your todo"

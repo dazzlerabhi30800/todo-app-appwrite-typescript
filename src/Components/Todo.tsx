@@ -4,9 +4,6 @@ import { useTodoContext } from "../Store/Store";
 
 const Todo = ({ todo }: { todo: Todo }) => {
   const { handleEdit, deleteTodo, completeTodo } = useTodoContext();
-  // const handleComplete = (value: boolean) => {
-  //   console.log(value);
-  // };
 
   return (
     <div className={`todo ${todo.completed && "completed"}`}>
