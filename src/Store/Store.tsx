@@ -45,9 +45,9 @@ export default function TodoContextProvider({
 
   // function to fetch todos
   const getDocuments = async () => {
+    setLoading(true);
     const response = await databases.listDocuments(Database_id, Collection_id);
     if (!response) return;
-    setLoading(true);
     const documents: Todo[] = response.documents.map((doc: any) => ({
       $id: doc.$id,
       todo: doc.todo,
@@ -58,7 +58,7 @@ export default function TodoContextProvider({
     setTimeout(() => {
       setTodos(documents);
       setLoading(false);
-    }, 500);
+    }, 3000);
   };
 
   // to add todo
@@ -68,8 +68,8 @@ export default function TodoContextProvider({
     todoString: string
   ) => {
     e.preventDefault();
-    if (todoString.length < 5) {
-      alert("todo length is short");
+    if (todoString.length <= 5) {
+      alert("todo is short or empty");
       return;
     }
     let payload = {
@@ -97,6 +97,7 @@ export default function TodoContextProvider({
     };
     await databases.updateDocument(Database_id, Collection_id, id, payload);
     getDocuments();
+    alert("todo added");
   };
 
   // function to confirm edit
@@ -120,7 +121,8 @@ export default function TodoContextProvider({
   const deleteTodo = async (id: string | undefined) => {
     if (!id || !todos) return;
     await databases.deleteDocument(Database_id, Collection_id, id);
-    setTodos(todos.filter((todo) => todo.$id !== id));
+    getDocuments();
+    alert("todo deleted");
   };
 
   // Mark Completed Todo
@@ -132,6 +134,7 @@ export default function TodoContextProvider({
     };
     await databases.updateDocument(Database_id, Collection_id, id, payload);
     getDocuments();
+    alert("todo updated");
   };
 
   // Return component

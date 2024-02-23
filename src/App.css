@@ -21,9 +21,10 @@ body {
 
 :root {
   --form-border-radius: 5px;
+  --pink: #f65f8a;
 }
 
-#root {
+main {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -32,21 +33,32 @@ body {
   align-items: center;
 }
 
-form {
+.todos--wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.input--form {
   display: flex;
   align-items: center;
   width: clamp(270px, 90%, 450px);
-  margin: 9px auto 0;
+  margin: 13px auto 0;
 }
 
-h1 {
+h1:not(.auth--heading) {
   text-align: center;
   font-size: clamp(1.5rem, 2vw + 5px, 2.5rem);
+  color: var(--pink);
+  margin: 10px 0;
 }
 
 #todo--input,
 .submit--btn {
-  padding: 12px;
+  padding: 13px;
   border: none;
   outline: none;
   font-size: clamp(0.85rem, 1vw + 3px, 1rem);
@@ -72,7 +84,7 @@ h1 {
 }
 
 .submit--btn:hover {
-  background: #181831;
+  background: #f557bb;
   color: rgb(246, 246, 246);
 }
 

@@ -6,6 +6,7 @@ export default function InputForm() {
   const { handleSubmit } = useTodoContext();
   return (
     <form
+      className="input--form"
       onSubmit={(e) => {
         handleSubmit(e, todoInput);
         setTodoInput("");

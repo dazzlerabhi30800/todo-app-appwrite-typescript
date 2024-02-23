@@ -1,6 +1,8 @@
+@import "./Auth.css";
+
 :root {
-  --orange: #d5ef6b;
-  --red: rgb(243, 26, 88);
+  --green: #d5ef6b;
+  --red: #f31a58;
   --button-font-size: clamp(0.8rem, 1.2vw + 2px, 1.4rem);
   --check-label-padding: 0px 10px;
 }
@@ -23,16 +25,19 @@ button {
   color: #fff;
   font-size: clamp(1.5rem, 1.8vw + 5px, 2.2rem);
 }
+.mode--btn:hover {
+  color: var(--pink);
+}
 
 button:disabled {
   opacity: 0.4;
   cursor: not-allowed;
 }
 
-.todo--wrapper {
+.todos--container {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 2.5rem;
   margin: 3rem 0;
   width: clamp(270px, 95%, 560px);
   align-items: center;
@@ -121,10 +126,9 @@ button:disabled {
 .remove--btn {
   padding: 8px;
   background: transparent;
-  border: 1px solid var(--orange);
+  border: 1px solid var(--green);
   border-radius: 2px;
-  color: var(--orange);
-  /* font-size: clamp(1.1rem, 1vw, 1.4rem); */
+  color: var(--green);
   font-size: var(--button-font-size);
   cursor: pointer;
 }
@@ -155,7 +159,7 @@ button:disabled {
     --orange: #f75050;
   }
   .remove--btn:hover {
-    --red: #f652d2;
+    --red: #f652f6;
   }
   .edit--form button:hover {
     background: #2df0bf;

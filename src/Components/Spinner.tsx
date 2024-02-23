@@ -1,3 +1,3 @@
-export default function Spinner() {
-  return <span className="loader"></span>;
+export default function Spinner({margin}: {margin: string}) {
+  return <span style={{margin}} className="loader"></span>;
 }
