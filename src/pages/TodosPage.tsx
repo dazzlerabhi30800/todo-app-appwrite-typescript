@@ -1,17 +1,18 @@
-import {useEffect} from 'react';
-import { useTodoContext } from '../Store/Store';
-import Spinner from '../Components/Spinner';
-import InputForm from '../Components/InputForm';
-import Todo from '../Components/Todo';
+import { useEffect } from "react";
+import { useTodoContext } from "../Store/Store";
+import Spinner from "../Components/Spinner";
+import InputForm from "../Components/InputForm";
+import Todo from "../Components/Todo";
 
-
-export default function TodosPage()  {
+export default function TodosPage() {
   // Context Import
   const { todos, getDocuments, loading } = useTodoContext();
 
   // function to run on start
   useEffect(() => {
-    getDocuments();
+    return () => {
+      getDocuments();
+    };
   }, []);
 
   if (!todos) return <Spinner margin="0 0" />;

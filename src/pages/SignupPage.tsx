@@ -1,4 +1,5 @@
 import { FormEvent } from "react";
+import { Link } from "react-router-dom";
 
 export default function SignupPage() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -24,6 +25,9 @@ export default function SignupPage() {
           Submit
         </button>
       </form>
+      <p className="link--text">
+        Already Registered? <Link to="/login">Login</Link>
+      </p>
     </div>
   );
 }

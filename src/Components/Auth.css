@@ -48,3 +48,18 @@
   background: #ef9cf5;
   color: #000;
 }
+
+.link--text {
+  text-align: center;
+  font-size: clamp(0.85rem, 1vw + 5px, 1rem);
+  margin: 8px 0 1px;
+}
+
+.link--text a {
+  text-decoration: none;
+  color: var(--pink);
+  transition: 0.3s linear;
+}
+.link--text a:hover {
+  text-decoration: underline;
+}
