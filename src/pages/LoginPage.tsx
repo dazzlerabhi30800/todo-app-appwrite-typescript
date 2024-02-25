@@ -9,13 +9,13 @@ export default function LoginPage() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
-  const handleLogin = async () => {
-    account.createOAuth2Session(
-      "google",
-      "http://localhost:5173/",
-      "http://localhost:5173/login",
-    );
-  };
+  // const handleLogin = async () => {
+  //   account.createOAuth2Session(
+  //     "google",
+  //     "http://localhost:5173/",
+  //     "http://localhost:5173/login",
+  //   );
+  // };
   useEffect(() => {
     return () => {
       getSession();
@@ -36,16 +36,16 @@ export default function LoginPage() {
         <button className="form--btn" type="submit">
           Login
         </button>
-        <button
-          onClick={handleLogin}
-          type="button"
-          className="form--btn google--login"
-        >
-          <FcGoogle
-            style={{ fontSize: "clamp(1.3rem, 1.2vw + 5px, 1.6rem)" }}
-          />{" "}
-          Login with Google
-        </button>
+        {/* <button */}
+        {/*   onClick={handleLogin} */}
+        {/*   type="button" */}
+        {/*   className="form--btn google--login" */}
+        {/* > */}
+        {/*   <FcGoogle */}
+        {/*     style={{ fontSize: "clamp(1.3rem, 1.2vw + 5px, 1.6rem)" }} */}
+        {/*   />{" "} */}
+        {/*   Login with Google */}
+        {/* </button> */}
       </form>
       <p className="link--text">
         Don't have an account? <Link to="/signup">Register</Link>

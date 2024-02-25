@@ -23,7 +23,9 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  position: relative;
 }
+
 .input--container label {
   font-size: clamp(0.9rem, 1vw, 1.1rem);
 }
@@ -43,6 +45,16 @@
   font-size: clamp(0.9rem, 1vw + 3px, 1rem);
   font-weight: 600;
 }
+
+.showpass--btn {
+  position: absolute;
+  color: #fff;
+  background: none;
+  font-size: 1.5rem;
+  top: 55%;
+  right: 15px;
+}
+
 .google--login {
   background: #75e2f1;
   display: flex;

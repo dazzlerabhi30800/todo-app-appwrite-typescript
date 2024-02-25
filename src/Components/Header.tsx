@@ -6,7 +6,7 @@ export default function Header() {
   const { user, setUser } = useTodoContext();
   // const navigate = useNavigate();
   const handleLogout = async () => {
-    await account.deleteSessions();
+    await account.deleteSession("current");
     setUser(null);
   };
   if (!user) return;

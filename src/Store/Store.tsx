@@ -21,17 +21,21 @@ interface todoContext {
   getDocuments: () => Promise<void>;
   handleSubmit: (
     e: FormEvent<HTMLFormElement>,
-    todoString: string,
+    todoString: string
   ) => Promise<void>;
   handleEdit: (id: string | undefined) => Promise<void>;
   completeEdit: (
     e: FormEvent<HTMLFormElement>,
     id: string | undefined,
-    editInput: string,
+    editInput: string
   ) => Promise<void>;
   deleteTodo: (id: string | undefined) => Promise<void>;
   completeTodo: (id: string | undefined, checked: boolean) => Promise<void>;
   getSession: () => Promise<void>;
+  handleSignUp: (
+    e: FormEvent<HTMLFormElement>,
+    credentials: signup
+  ) => Promise<void>;
 }
 
 export const TodoContext = createContext<todoContext | null>(null);
@@ -67,11 +71,42 @@ export default function TodoContextProvider({
     }, 1500);
   };
 
+  const handleSignUp = async (
+    e: FormEvent<HTMLFormElement>,
+    credentials: signup
+  ) => {
+    e.preventDefault();
+    let { email, name, pass1, pass2 } = credentials;
+    if (
+      email.length < 8 ||
+      name.length < 8 ||
+      pass1.length < 8 ||
+      pass2.length < 8
+    ) {
+      alert("one of your credentials are less than 5");
+      return;
+    }
+    if (pass1 !== pass2) {
+      alert("Your password & confirm password didn't match.");
+      return;
+    }
+    try {
+      const response = await account.create(ID.unique(), email, pass1, name);
+      console.log("user registered: ", response);
+      await account.createEmailSession(email, pass1);
+      let accountDetails = await account.get();
+      setUser(accountDetails);
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   // to add todo
 
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>,
-    todoString: string,
+    todoString: string
   ) => {
     e.preventDefault();
     if (todoString.length <= 5) {
@@ -88,7 +123,7 @@ export default function TodoContextProvider({
       Database_id,
       Collection_id,
       ID.unique(),
-      payload,
+      payload
     );
     if (!promise) return;
     getDocuments();
@@ -96,14 +131,10 @@ export default function TodoContextProvider({
 
   // function to get current user
   const getSession = async () => {
-    try {
-      const session = await account.get();
-      if (!session) return;
-      navigate("/");
-      setUser(session);
-    } catch (err) {
-      console.log(err);
-    }
+    const session = await account.get();
+    if (!session) return;
+    navigate("/");
+    setUser(session);
   };
 
   // function to edit Todo
@@ -122,7 +153,7 @@ export default function TodoContextProvider({
   const completeEdit = async (
     e: React.FormEvent<HTMLFormElement>,
     id: string | undefined,
-    editInput: string,
+    editInput: string
   ) => {
     e.preventDefault();
     if (!id || !todos) return;
@@ -169,6 +200,7 @@ export default function TodoContextProvider({
         deleteTodo,
         completeTodo,
         getSession,
+        handleSignUp,
       }}
     >
       {children}

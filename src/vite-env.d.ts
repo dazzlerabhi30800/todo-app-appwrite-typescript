@@ -11,3 +11,14 @@ type Todo = {
   todo_id: string;
 };
 
+
+type login = {
+  email: string,
+  pass: string
+}
+type signup = {
+  name: string,
+  email: string,
+  pass1: string,
+  pass2: string,
+}
