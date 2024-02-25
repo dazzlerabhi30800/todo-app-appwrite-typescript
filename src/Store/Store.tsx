@@ -14,10 +14,12 @@ import { useNavigate } from "react-router-dom";
 
 interface todoContext {
   user: any | null;
+  showPass: boolean;
   todos: Todo[] | null;
   loading: boolean;
   setUser: Dispatch<SetStateAction<any | null>>;
   setTodos: Dispatch<SetStateAction<Todo[] | null>>;
+  setShowPass: Dispatch<SetStateAction<boolean>>;
   getDocuments: () => Promise<void>;
   handleSubmit: (
     e: FormEvent<HTMLFormElement>,
@@ -36,6 +38,10 @@ interface todoContext {
     e: FormEvent<HTMLFormElement>,
     credentials: signup
   ) => Promise<void>;
+  handleLogin: (
+    e: FormEvent<HTMLFormElement>,
+    credentials: login
+  ) => Promise<void>;
 }
 
 export const TodoContext = createContext<todoContext | null>(null);
@@ -49,6 +55,7 @@ export default function TodoContextProvider({
   const [todos, setTodos] = useState<Todo[] | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [user, setUser] = useState<any | null>(null);
+  const [showPass, setShowPass] = useState<boolean>(false);
   const navigate = useNavigate();
 
   // functions
@@ -94,6 +101,23 @@ export default function TodoContextProvider({
       const response = await account.create(ID.unique(), email, pass1, name);
       console.log("user registered: ", response);
       await account.createEmailSession(email, pass1);
+      let accountDetails = await account.get();
+      setUser(accountDetails);
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleLogin = async (
+    e: FormEvent<HTMLFormElement>,
+    credentials: login
+  ) => {
+    e.preventDefault();
+    let { email, pass } = credentials;
+    if (email.length < 8 || pass.length < 8) return;
+    try {
+      await account.createEmailSession(email, pass);
       let accountDetails = await account.get();
       setUser(accountDetails);
       navigate("/");
@@ -189,10 +213,12 @@ export default function TodoContextProvider({
     <TodoContext.Provider
       value={{
         user,
+        showPass,
         todos,
         loading,
         setUser,
         setTodos,
+        setShowPass,
         getDocuments,
         handleSubmit,
         handleEdit,
@@ -201,6 +227,7 @@ export default function TodoContextProvider({
         completeTodo,
         getSession,
         handleSignUp,
+        handleLogin,
       }}
     >
       {children}

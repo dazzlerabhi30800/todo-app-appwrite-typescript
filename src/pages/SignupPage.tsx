@@ -10,8 +10,7 @@ export default function SignupPage() {
     pass1: "",
     pass2: "",
   });
-  const [showPass, setShowPass] = useState<boolean>(false);
-  const { handleSignUp } = useTodoContext();
+  const { handleSignUp, showPass, setShowPass } = useTodoContext();
 
   return (
     <div className="authentication--wrapper signup--wrapper">
