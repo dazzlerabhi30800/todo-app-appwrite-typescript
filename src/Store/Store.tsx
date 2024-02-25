@@ -7,9 +7,10 @@ import {
   useContext,
   useState,
 } from "react";
-import { Collection_id, Database_id, databases } from "../appWrite";
+import { Collection_id, Database_id, account, databases } from "../appWrite";
 import { ID } from "appwrite";
 import { nanoid } from "nanoid";
+import { useNavigate } from "react-router-dom";
 
 interface todoContext {
   user: any | null;
@@ -20,16 +21,17 @@ interface todoContext {
   getDocuments: () => Promise<void>;
   handleSubmit: (
     e: FormEvent<HTMLFormElement>,
-    todoString: string
+    todoString: string,
   ) => Promise<void>;
   handleEdit: (id: string | undefined) => Promise<void>;
   completeEdit: (
     e: FormEvent<HTMLFormElement>,
     id: string | undefined,
-    editInput: string
+    editInput: string,
   ) => Promise<void>;
   deleteTodo: (id: string | undefined) => Promise<void>;
   completeTodo: (id: string | undefined, checked: boolean) => Promise<void>;
+  getSession: () => Promise<void>;
 }
 
 export const TodoContext = createContext<todoContext | null>(null);
@@ -43,6 +45,7 @@ export default function TodoContextProvider({
   const [todos, setTodos] = useState<Todo[] | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [user, setUser] = useState<any | null>(null);
+  const navigate = useNavigate();
 
   // functions
 
@@ -51,7 +54,6 @@ export default function TodoContextProvider({
     setLoading(true);
     const response = await databases.listDocuments(Database_id, Collection_id);
     if (!response) return;
-    console.log(response.documents);
     const documents: Todo[] = response.documents.map((doc: any) => ({
       $id: doc.$id,
       todo: doc.todo,
@@ -69,7 +71,7 @@ export default function TodoContextProvider({
 
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>,
-    todoString: string
+    todoString: string,
   ) => {
     e.preventDefault();
     if (todoString.length <= 5) {
@@ -86,10 +88,22 @@ export default function TodoContextProvider({
       Database_id,
       Collection_id,
       ID.unique(),
-      payload
+      payload,
     );
     if (!promise) return;
     getDocuments();
+  };
+
+  // function to get current user
+  const getSession = async () => {
+    try {
+      const session = await account.get();
+      if (!session) return;
+      navigate("/");
+      setUser(session);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   // function to edit Todo
@@ -108,7 +122,7 @@ export default function TodoContextProvider({
   const completeEdit = async (
     e: React.FormEvent<HTMLFormElement>,
     id: string | undefined,
-    editInput: string
+    editInput: string,
   ) => {
     e.preventDefault();
     if (!id || !todos) return;
@@ -126,7 +140,6 @@ export default function TodoContextProvider({
     if (!id || !todos) return;
     await databases.deleteDocument(Database_id, Collection_id, id);
     getDocuments();
-    alert("todo deleted");
   };
 
   // Mark Completed Todo
@@ -138,7 +151,6 @@ export default function TodoContextProvider({
     };
     await databases.updateDocument(Database_id, Collection_id, id, payload);
     getDocuments();
-    alert("todo updated");
   };
 
   // Return component
@@ -156,6 +168,7 @@ export default function TodoContextProvider({
         completeEdit,
         deleteTodo,
         completeTodo,
+        getSession,
       }}
     >
       {children}

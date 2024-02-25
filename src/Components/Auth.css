@@ -37,16 +37,27 @@
   outline: none;
 }
 
-.submit--btn--2 {
+.form--btn {
   border-radius: 5px;
   padding: 13px;
   font-size: clamp(0.9rem, 1vw + 3px, 1rem);
   font-weight: 600;
 }
+.google--login {
+  background: #75e2f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
 
-.submit--btn--2:hover {
+.form--btn:hover {
   background: #ef9cf5;
   color: #000;
+}
+
+.google--login:hover {
+  background: rgb(54, 142, 242);
 }
 
 .link--text {

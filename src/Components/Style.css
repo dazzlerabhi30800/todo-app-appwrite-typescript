@@ -7,6 +7,28 @@
   --check-label-padding: 0px 10px;
 }
 
+header {
+  padding: 1rem;
+  margin: 1rem auto 0;
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+.username {
+  font-size: clamp(1.3rem, 1.2vw + 5px, 1.5rem);
+}
+.logout--btn {
+  background: var(--pink);
+  padding: 8px 12px;
+  border-radius: 2px;
+  font-size: clamp(0.95rem, 1vw + 5px, 1.1rem);
+  color: #fff;
+  font-weight: 600;
+}
+.logout--btn:hover {
+  filter: brightness(70%);
+}
+
 button,
 input {
   border: none;
