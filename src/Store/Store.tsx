@@ -172,7 +172,6 @@ export default function TodoContextProvider({
     };
     await databases.updateDocument(Database_id, Collection_id, id, payload);
     getDocuments();
-    alert("todo added");
   };
 
   // function to confirm edit
