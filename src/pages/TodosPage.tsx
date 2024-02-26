@@ -11,7 +11,6 @@ export default function TodosPage() {
   // function to run on start
   useEffect(() => {
     getDocuments();
-    console.log(user);
   }, []);
 
   if (!todos) return <Spinner margin="0 0" />;

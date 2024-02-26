@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTodoContext } from "../Store/Store";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { account } from "../appWrite";
+import { FcGoogle } from "react-icons/fc";
 
 export default function LoginPage() {
   const { getSession, handleLogin, setShowPass, showPass } = useTodoContext();
@@ -9,6 +11,13 @@ export default function LoginPage() {
     email: "",
     pass: "",
   });
+  const handleGoogleAuth = () => {
+    account.createOAuth2Session(
+      "google",
+      "http://localhost:5173",
+      "http://localhost:5173/login"
+    );
+  };
   useEffect(() => {
     return () => {
       getSession();
@@ -51,6 +60,13 @@ export default function LoginPage() {
         </div>
         <button className="form--btn" type="submit">
           Login
+        </button>
+        <button
+          className="form--btn google--login"
+          type="button"
+          onClick={handleGoogleAuth}
+        >
+          <FcGoogle style={{ fontSize: "1.3rem" }} /> Google Login
         </button>
       </form>
       <p className="link--text">
