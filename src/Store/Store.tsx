@@ -71,6 +71,7 @@ export default function TodoContextProvider({
       todo_id: doc.todo_id,
       completed: doc.completed,
       edit: doc.edit,
+      user_id: doc.user_id,
     }));
     setTimeout(() => {
       setTodos(documents);
@@ -90,7 +91,7 @@ export default function TodoContextProvider({
       pass1.length < 8 ||
       pass2.length < 8
     ) {
-      alert("one of your credentials are less than 5");
+      alert("one of your credentials are less than 8");
       return;
     }
     if (pass1 !== pass2) {
@@ -99,7 +100,6 @@ export default function TodoContextProvider({
     }
     try {
       const response = await account.create(ID.unique(), email, pass1, name);
-      console.log("user registered: ", response);
       await account.createEmailSession(email, pass1);
       let accountDetails = await account.get();
       setUser(accountDetails);
@@ -137,10 +137,12 @@ export default function TodoContextProvider({
       alert("todo is short or empty");
       return;
     }
+    if (!user) return;
     let payload = {
       todo: todoString,
       todo_id: nanoid(),
       completed: false,
+      user_id: user.$id,
       edit: false,
     };
     const promise = await databases.createDocument(

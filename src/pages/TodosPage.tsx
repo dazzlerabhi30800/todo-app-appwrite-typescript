@@ -6,7 +6,7 @@ import Todo from "../Components/Todo";
 
 export default function TodosPage() {
   // Context Import
-  const { todos, getDocuments, loading } = useTodoContext();
+  const { todos, getDocuments, loading, user } = useTodoContext();
 
   // function to run on start
   useEffect(() => {
@@ -23,9 +23,10 @@ export default function TodosPage() {
       {loading && <Spinner margin="30px" />}
       {!loading && (
         <div className="todos--container">
-          {todos.map((todo) => (
-            <Todo key={todo.$id} todo={todo} />
-          ))}
+          {todos.map(
+            (todo) =>
+              user.$id === todo.user_id && <Todo key={todo.$id} todo={todo} />
+          )}
         </div>
       )}
     </div>

@@ -3,8 +3,14 @@
 :root {
   --green: #d5ef6b;
   --red: #f31a58;
+  --complete-label-background: linear-gradient(to top, #f279ac, #f3ca70);
+  --label-border-color: #fff;
   --button-font-size: clamp(0.8rem, 1.2vw + 2px, 1.4rem);
   --check-label-padding: 0px 10px;
+}
+.light {
+  --complete-label-background: linear-gradient(to top, #ffffff, #fff);
+  --label-border-color: #ffffff;
 }
 
 header {
@@ -61,7 +67,7 @@ button:disabled {
   flex-direction: column;
   gap: 2.5rem;
   margin: 3rem 0;
-  width: clamp(270px, 95%, 560px);
+  width: clamp(350px, 95%, 560px);
   align-items: center;
 }
 
@@ -120,7 +126,7 @@ button:disabled {
   appearance: none;
 }
 .complete--container label {
-  border: 1px solid #fff;
+  border: 1px solid var(--label-border-color);
   border-radius: 50%;
   padding: var(--check-label-padding);
   width: 15px;
@@ -130,7 +136,7 @@ button:disabled {
   transition: 0.3s linear;
 }
 .todo--check:checked + label {
-  background: linear-gradient(to top, rgb(0, 255, 157), #20f495);
+  background: var(--complete-label-background);
 }
 
 .todo p {
@@ -190,6 +196,6 @@ button:disabled {
 
 @media Screen and (width >= 750px) {
   :root {
-    --check-label-padding: 0 12px;
+    --check-label-padding: 0 10px;
   }
 }
