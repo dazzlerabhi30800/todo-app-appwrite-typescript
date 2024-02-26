@@ -11,14 +11,11 @@ export default function LoginPage() {
     email: "",
     pass: "",
   });
-  console.log(window.location.origin);
   const handleGoogleAuth = () => {
     account.createOAuth2Session(
       "google",
-      window.location.origin,
-      window.location.origin + "/login"
-      // "https://todo-app-appwrite-typescript.vercel.app/",
-      // "https://todo-app-appwrite-typescript.vercel.app/login"
+      "https://todo-app-appwrite-typescript.vercel.app",
+      "https://todo-app-appwrite-typescript.vercel.app/login"
     );
   };
   useEffect(() => {
