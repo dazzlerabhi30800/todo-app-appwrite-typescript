@@ -15,19 +15,19 @@
 
 header {
   padding: 1rem;
-  margin: 1rem auto 0;
-  width: 50%;
+  margin: 5rem auto 0;
+  width: clamp(300px, 80%, 600px);
   display: flex;
   justify-content: space-between;
 }
 .username {
-  font-size: clamp(1.3rem, 1.2vw + 5px, 1.5rem);
+  font-size: clamp(1rem, 1.2vw + 5px, 1.5rem);
 }
 .logout--btn {
   background: var(--pink);
   padding: 8px 12px;
   border-radius: 2px;
-  font-size: clamp(0.95rem, 1vw + 5px, 1.1rem);
+  font-size: clamp(0.85rem, 1vw + 5px, 1.1rem);
   color: #fff;
   font-weight: 600;
 }
@@ -67,7 +67,7 @@ button:disabled {
   flex-direction: column;
   gap: 2.5rem;
   margin: 3rem 0;
-  width: clamp(350px, 95%, 560px);
+  width: clamp(300px, 95%, 560px);
   align-items: center;
 }
 
@@ -78,7 +78,7 @@ button:disabled {
   position: relative;
   gap: 10px;
   justify-content: space-between;
-  width: 95%;
+  width: 100%;
   padding: 1rem;
   border-radius: 5px;
   background: #252935;
