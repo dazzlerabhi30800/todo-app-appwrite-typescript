@@ -61,12 +61,6 @@ export default function TodoContextProvider({
 
   // functions
 
-  useEffect(() => {
-    return () => {
-      getSession();
-    };
-  }, []);
-
   // function to fetch todos
   const getDocuments = async () => {
     setLoading(true);
