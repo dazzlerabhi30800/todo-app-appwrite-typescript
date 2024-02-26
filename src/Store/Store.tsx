@@ -64,7 +64,7 @@ export default function TodoContextProvider({
   const getDocuments = async () => {
     setLoading(true);
     const response = await databases.listDocuments(Database_id, Collection_id);
-    if (!response) return;
+    // if (!response) return;
     console.log(response.documents);
     const documents: Todo[] = response.documents.map((doc: any) => ({
       $id: doc.$id,
