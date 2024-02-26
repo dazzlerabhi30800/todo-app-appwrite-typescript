@@ -14,8 +14,8 @@ export default function LoginPage() {
   const handleGoogleAuth = () => {
     account.createOAuth2Session(
       "google",
-      "http://localhost:5173",
-      "http://localhost:5173/login"
+      "https://todo-app-appwrite-typescript.vercel.app",
+      "https://todo-app-appwrite-typescript.vercel.app/login"
     );
   };
   useEffect(() => {
