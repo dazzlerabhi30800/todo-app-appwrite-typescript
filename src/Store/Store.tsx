@@ -5,6 +5,7 @@ import {
   SetStateAction,
   createContext,
   useContext,
+  useEffect,
   useState,
 } from "react";
 import { Collection_id, Database_id, account, databases } from "../appWrite";
@@ -59,6 +60,12 @@ export default function TodoContextProvider({
   const navigate = useNavigate();
 
   // functions
+
+  useEffect(() => {
+    return () => {
+      getSession();
+    };
+  }, []);
 
   // function to fetch todos
   const getDocuments = async () => {
