@@ -100,7 +100,7 @@ export default function TodoContextProvider({
       return;
     }
     try {
-      const response = await account.create(ID.unique(), email, pass1, name);
+      await account.create(ID.unique(), email, pass1, name);
       await account.createEmailSession(email, pass1);
       let accountDetails = await account.get();
       setUser(accountDetails);
