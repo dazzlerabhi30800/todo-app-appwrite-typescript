@@ -10,10 +10,8 @@ export default function TodosPage() {
 
   // function to run on start
   useEffect(() => {
-    return () => {
-      getDocuments();
-      console.log(user);
-    };
+    getDocuments();
+    console.log(user);
   }, []);
 
   if (!todos) return <Spinner margin="0 0" />;
