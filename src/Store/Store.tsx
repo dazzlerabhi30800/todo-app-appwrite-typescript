@@ -165,6 +165,7 @@ export default function TodoContextProvider({
   // function to get current user
   const getSession = async () => {
     const session = await account.get();
+    console.log(session);
     if (!session) return;
     navigate("/");
     setUser(session);
