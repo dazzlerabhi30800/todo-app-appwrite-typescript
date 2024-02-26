@@ -12,6 +12,7 @@ export default function TodosPage() {
   useEffect(() => {
     return () => {
       getDocuments();
+      console.log(user);
     };
   }, []);
 

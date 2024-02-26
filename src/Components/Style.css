@@ -129,8 +129,8 @@ button:disabled {
   border: 1px solid var(--label-border-color);
   border-radius: 50%;
   padding: var(--check-label-padding);
-  width: 15px;
-  height: 15px;
+  /* width: 15px;
+  height: 15px; */
   background: transparent;
   cursor: pointer;
   transition: 0.3s linear;
@@ -197,5 +197,11 @@ button:disabled {
 @media Screen and (width >= 750px) {
   :root {
     --check-label-padding: 0 10px;
+  }
+}
+
+@media Screen and (width >= 1000px) {
+  :root {
+    --check-label-padding: 0 12px;
   }
 }
