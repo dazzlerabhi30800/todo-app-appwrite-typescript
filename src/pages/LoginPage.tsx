@@ -14,7 +14,7 @@ export default function LoginPage() {
   const handleGoogleAuth = () => {
     account.createOAuth2Session(
       "google",
-      "https://todo-app-appwrite-typescript.vercel.app",
+      "https://todo-app-appwrite-typescript.vercel.app/",
       "https://todo-app-appwrite-typescript.vercel.app/login"
     );
   };
