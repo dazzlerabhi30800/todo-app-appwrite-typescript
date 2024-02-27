@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTodoContext } from "../Store/Store";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { account } from "../appWrite";
 
 export default function LoginPage() {
   const { getSession, handleLogin, setShowPass, showPass } = useTodoContext();
@@ -9,6 +10,15 @@ export default function LoginPage() {
     email: "",
     pass: "",
   });
+
+  const handleGoogleLogin = () => {
+    account.createOAuth2Session(
+      "google",
+      "https://todo-app-appwrite-typescript.vercel.app",
+      "https://todo-app-appwrite-typescript.vercel.app/login",
+    );
+  };
+
   useEffect(() => {
     getSession();
   }, []);
@@ -49,6 +59,13 @@ export default function LoginPage() {
         </div>
         <button className="form--btn" type="submit">
           Login
+        </button>
+        <button
+          onClick={handleGoogleLogin}
+          className="form--btn google--login"
+          type="button"
+        >
+          Google Login
         </button>
       </form>
       <p className="link--text">

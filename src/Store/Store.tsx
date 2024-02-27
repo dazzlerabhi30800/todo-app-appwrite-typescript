@@ -23,24 +23,24 @@ interface todoContext {
   getDocuments: () => Promise<void>;
   handleSubmit: (
     e: FormEvent<HTMLFormElement>,
-    todoString: string
+    todoString: string,
   ) => Promise<void>;
   handleEdit: (id: string | undefined) => Promise<void>;
   completeEdit: (
     e: FormEvent<HTMLFormElement>,
     id: string | undefined,
-    editInput: string
+    editInput: string,
   ) => Promise<void>;
   deleteTodo: (id: string | undefined) => Promise<void>;
   completeTodo: (id: string | undefined, checked: boolean) => Promise<void>;
   getSession: () => Promise<void>;
   handleSignUp: (
     e: FormEvent<HTMLFormElement>,
-    credentials: signup
+    credentials: signup,
   ) => Promise<void>;
   handleLogin: (
     e: FormEvent<HTMLFormElement>,
-    credentials: login
+    credentials: login,
   ) => Promise<void>;
 }
 
@@ -81,7 +81,7 @@ export default function TodoContextProvider({
 
   const handleSignUp = async (
     e: FormEvent<HTMLFormElement>,
-    credentials: signup
+    credentials: signup,
   ) => {
     e.preventDefault();
     let { email, name, pass1, pass2 } = credentials;
@@ -111,7 +111,7 @@ export default function TodoContextProvider({
 
   const handleLogin = async (
     e: FormEvent<HTMLFormElement>,
-    credentials: login
+    credentials: login,
   ) => {
     e.preventDefault();
     let { email, pass } = credentials;
@@ -130,7 +130,7 @@ export default function TodoContextProvider({
 
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>,
-    todoString: string
+    todoString: string,
   ) => {
     e.preventDefault();
     if (todoString.length <= 5) {
@@ -149,7 +149,7 @@ export default function TodoContextProvider({
       Database_id,
       Collection_id,
       ID.unique(),
-      payload
+      payload,
     );
     if (!promise) return;
     getDocuments();
@@ -179,7 +179,7 @@ export default function TodoContextProvider({
   const completeEdit = async (
     e: React.FormEvent<HTMLFormElement>,
     id: string | undefined,
-    editInput: string
+    editInput: string,
   ) => {
     e.preventDefault();
     if (!id || !todos) return;

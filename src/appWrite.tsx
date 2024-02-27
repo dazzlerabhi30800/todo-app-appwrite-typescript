@@ -7,8 +7,7 @@ export const Collection_id = "65d2e1c1ceefca180096";
 const client = new Client();
 export const account = new Account(client);
 
-client
-  .setEndpoint("https://cloud.appwrite.io/v1")
+client .setEndpoint("https://cloud.appwrite.io/v1")
   .setProject("65d2e06571f6b3feabd6");
 
 export const databases = new Databases(client);
