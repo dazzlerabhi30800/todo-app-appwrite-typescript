@@ -4,7 +4,6 @@ import { useTodoContext } from "../Store/Store";
 
 const Todo = ({ todo }: { todo: Todo }) => {
   const { handleEdit, deleteTodo, completeTodo } = useTodoContext();
-
   return (
     <div className={`todo ${todo.completed && "completed"}`}>
       <div className="complete--container">
@@ -17,7 +16,11 @@ const Todo = ({ todo }: { todo: Todo }) => {
         />
         <label htmlFor={`todo--${todo.$id}`}></label>
       </div>
-      {!todo.edit ? <p>{todo.todo}</p> : <EditTodo note={todo} />}
+      {!todo.edit ? (
+        <p className="todo--text">{todo.todo}</p>
+      ) : (
+        <EditTodo note={todo} />
+      )}
       <div className="button--container">
         <button
           disabled={todo.completed}
@@ -34,6 +37,9 @@ const Todo = ({ todo }: { todo: Todo }) => {
           <FaTrash />
         </button>
       </div>
+      <p className="timestamp">
+        created: {new Date(todo.$createdAt).toLocaleString()}
+      </p>
     </div>
   );
 };

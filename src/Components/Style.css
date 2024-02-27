@@ -6,7 +6,8 @@
   --complete-label-background: linear-gradient(to top, #f279ac, #f3ca70);
   --label-border-color: #fff;
   --button-font-size: clamp(0.8rem, 1.2vw + 2px, 1.4rem);
-  --check-label-padding: 0px 10px;
+  --check-label-padding: 0 10px;
+  --todo-columns: 30px 1fr 80px;
 }
 .light {
   --complete-label-background: linear-gradient(to top, #ffffff, #fff);
@@ -67,16 +68,17 @@ button:disabled {
   flex-direction: column;
   gap: 2.5rem;
   margin: 3rem 0;
-  width: clamp(300px, 95%, 560px);
+  width: 100%;
+  max-width: 600px;
   align-items: center;
 }
 
 .todo {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: var(--todo-columns);
+  place-items: center start;
   position: relative;
-  gap: 10px;
+  gap: 12px;
   justify-content: space-between;
   width: 100%;
   padding: 1rem;
@@ -139,13 +141,14 @@ button:disabled {
   background: var(--complete-label-background);
 }
 
-.todo p {
-  font-size: clamp(0.9rem, 1vw + 4px, 1rem);
+.todo--text {
+  font-size: clamp(0.85rem, 1vw + 4px, 1rem);
   font-weight: 500;
 }
 
 .button--container {
   display: flex;
+  place-self: center end;
   gap: 12px;
   align-items: center;
 }
@@ -163,6 +166,13 @@ button:disabled {
 .remove--btn {
   color: var(--red);
   border-color: var(--red);
+}
+.timestamp {
+  color: #ccc;
+  font-size: clamp(0.8rem, 1vw, 0.87rem) !important;
+  font-weight: 400;
+  grid-column: span 3;
+  margin: 10px 0 1px;
 }
 
 .edit--form {
@@ -197,10 +207,11 @@ button:disabled {
 @media Screen and (width >= 750px) {
   :root {
     --check-label-padding: 0 10px;
+    --todo-columns: 50px 1fr 1fr;
   }
 }
 
-@media Screen and (width >= 1000px) {
+@media Screen and (width >= 1300px) {
   :root {
     --check-label-padding: 0 12px;
   }

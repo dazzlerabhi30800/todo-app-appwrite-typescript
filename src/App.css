@@ -40,6 +40,8 @@ main {
   gap: 1rem;
   margin: 5rem 0 0;
   justify-content: start;
+  width: 95%;
+  max-width: 650px;
   align-items: center;
 }
 

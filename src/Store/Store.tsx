@@ -72,6 +72,7 @@ export default function TodoContextProvider({
       completed: doc.completed,
       edit: doc.edit,
       user_id: doc.user_id,
+      $createdAt: doc.$createdAt
     }));
     setTimeout(() => {
       setTodos(documents);
@@ -158,7 +159,6 @@ export default function TodoContextProvider({
   // function to get current user
   const getSession = async () => {
     const session = await account.get();
-    console.log(session);
     if (!session) return;
     navigate("/");
     setUser(session);

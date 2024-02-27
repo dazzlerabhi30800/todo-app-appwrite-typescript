@@ -1,6 +1,6 @@
 type Todo = {
   $collectionId?: string;
-  $createdAt?: string;
+  $createdAt: string;
   $databaseId?: string;
   $id: string;
   $permissions?: any;
