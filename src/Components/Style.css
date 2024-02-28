@@ -92,7 +92,9 @@ button:disabled {
   z-index: -1;
   position: absolute;
   content: "";
-  inset: -1px;
+  transform: scaleY(1.06) scaleX(1.01);
+  width: 100%;
+  height: 100%;
   border-radius: 5px;
   background: linear-gradient(245deg, #36caf3, rgb(255, 0, 123));
 }
