@@ -6,6 +6,7 @@ import {
   createContext,
   useContext,
   useState,
+  useEffect,
 } from "react";
 import { Collection_id, Database_id, account, databases } from "../appWrite";
 import { ID } from "appwrite";
@@ -60,6 +61,10 @@ export default function TodoContextProvider({
 
   // functions
 
+  useEffect(() => {
+    getSession();
+  }, []);
+
   // function to fetch todos
   const getDocuments = async () => {
     setLoading(true);
@@ -72,7 +77,7 @@ export default function TodoContextProvider({
       completed: doc.completed,
       edit: doc.edit,
       user_id: doc.user_id,
-      $createdAt: doc.$createdAt
+      $createdAt: doc.$createdAt,
     }));
     setTimeout(() => {
       setTodos(documents);
@@ -160,8 +165,10 @@ export default function TodoContextProvider({
   const getSession = async () => {
     const session = await account.get();
     if (!session) return;
+    setLoading(true);
     navigate("/");
     setUser(session);
+    setLoading(false);
   };
 
   // function to edit Todo

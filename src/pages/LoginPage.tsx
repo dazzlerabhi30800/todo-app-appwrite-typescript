@@ -1,18 +1,20 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useTodoContext } from "../Store/Store";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import Spinner from "../Components/Spinner";
 
 export default function LoginPage() {
-  const { getSession, handleLogin, setShowPass, showPass } = useTodoContext();
+  const { handleLogin, setShowPass, showPass, loading } = useTodoContext();
   const [loginInfo, setLoginInfo] = useState<login>({
     email: "",
     pass: "",
   });
 
-  useEffect(() => {
-    getSession();
-  }, []);
+  // useEffect(() => {
+  //   getSession();
+  // }, []);
+  if(loading) return <Spinner margin="0 0" />
   return (
     <div className="authentication--wrapper login--wrapper">
       <h1>Login</h1>
