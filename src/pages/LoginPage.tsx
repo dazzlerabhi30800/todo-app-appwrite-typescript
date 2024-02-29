@@ -11,9 +11,6 @@ export default function LoginPage() {
     pass: "",
   });
 
-  // useEffect(() => {
-  //   getSession();
-  // }, []);
   if(loading) return <Spinner margin="0 0" />
   return (
     <div className="authentication--wrapper login--wrapper">
